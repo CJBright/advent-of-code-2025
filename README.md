@@ -12,13 +12,13 @@ This repository contains my solutions for Advent of Code 2025, organised with on
 I have not included input data within the repository as per the author's request.
 If you are reviewing my code and wish to test it, please either contact me for data or sign up to the coding competition independently and run my code with your provided inputs.
 
-# My files
+## My files
 
 Each day has a solution file `solution.py` or `solution.js`.
 Solutions are often discretised into functions for file loading, part-1 solution, and part-2 solution.
 This may violate DRY principals but provides the cleanest reading of each function independently.
 
-# Running a Solution
+## Running a Solution
 
 Locally I use the files `input.txt` and `example.txt` within each day's directory to store the test and full input datasets respectively.
 The choice of input file is usually set within the solution file so be sure to read carefully.
