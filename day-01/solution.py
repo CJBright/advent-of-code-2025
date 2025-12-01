@@ -6,6 +6,18 @@ def read_file(day, kind):
     with open(filename) as f:
         return f.read().strip()
 
+def apply_overflow(current_pos):
+    # Account for overflow of neighbouring values 0 and 99.
+    if current_pos > 99:
+        current_pos -= 100 # 100 -> 00 
+    elif current_pos < 0:
+        current_pos += 100 # -1 -> 99
+    
+    if current_pos > 99 or current_pos < 0:
+        return apply_overflow(current_pos)
+    
+    return current_pos
+
 """ 
 PART 1
 
@@ -21,18 +33,6 @@ Steps:
     5. Account for bi-directional overflow between 0 and 99 values.
     6. Count the number of times the dial is at 0 after each step.
 """
-
-def apply_overflow(current_pos):
-    # Account for overflow of neighboring values 0 and 99.
-    if current_pos > 99:
-        current_pos -= 100 # 100 -> 00 
-    elif current_pos < 0:
-        current_pos += 100 # -1 -> 99
-    
-    if current_pos > 99 or current_pos < 0:
-        return apply_overflow(current_pos)
-    
-    return current_pos
 
 def part_1(kind="input"):
     START_POS = 50
@@ -74,18 +74,6 @@ Steps.
     7. Update the total count for passing the 00 position.
 """
 
-def apply_overflow_count(current_pos):
-    # Account for overflow of neighboring values 0 and 99.
-    if current_pos > 99:
-        current_pos -= 100 # 100 -> 00 
-    elif current_pos < 0:
-        current_pos += 100 # -1 -> 99
-    
-    if current_pos > 99 or current_pos < 0:
-        current_pos = apply_overflow_count(current_pos)
-    
-    return current_pos
-
 def part_2(kind="input"):
     START_POS = 50
     current_pos = START_POS
@@ -113,13 +101,11 @@ def part_2(kind="input"):
 
         logging.debug(instruction)
         logging.debug(f"Instruction end position: {current_pos}.")
-        current_pos = apply_overflow_count(current_pos)
+        current_pos = apply_overflow(current_pos)
         logging.debug(f"After correction position: {current_pos}.\n")
         logging.debug(f"Current zeros count: {zeros_count}.\n")
     
     logging.info(f"Total zeros count: {zeros_count}.")
-        
-
 
 if __name__ == "__main__":
     part_1("example")
